@@ -4,6 +4,14 @@
   <%= @activity.name %>
 </h1>
 
+
+ 
+  
+  <p><strong>Accepted:</strong>
+  <%= @activity.accepted %>
+  </p>
+
+
 <creator>by 
   <%@user=User.find_by_id(@activity.id_creator) %>
   <%= link_to "#{@user.name}", user_path(@user.id) %>

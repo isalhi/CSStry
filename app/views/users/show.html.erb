@@ -6,12 +6,9 @@
   </div>
   
  <article class="info">
-    <p><%= @user.email %> | <%= link_to "Friends", '#'%> | <%= link_to "Activities", activities_path %>
-	
-	
-	 <% if admin_situation?(@user)%> 
+    <p><%= @user.email %> | <%= link_to "Friends", '#'%> | <%= link_to "Activities", activities_path %> |
 	  <%= "Admin Situation:" "#{@user.admin}" %>
-	<% end %>
+	
        </p>
   </article>
   

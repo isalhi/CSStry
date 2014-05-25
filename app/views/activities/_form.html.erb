@@ -40,6 +40,12 @@
     <%= f.label :privacy, :class => "field_title" %><br>
     <%= f.check_box :privacy %>
   </div>
+  <% if current_user.name == "administrator" %>
+  <div class="field">
+    <%= f.label :accepted, :class => "field_title" %><br>
+    <%= f.check_box :accepted %>
+  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

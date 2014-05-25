@@ -110,12 +110,16 @@ class ActivitiesController < ApplicationController
   private
     
     def correct_user
-        redirect_to(home_path) unless current_user.id == @activity.id_creator
+        redirect_to(home_path) unless current_user.id == @activity.id_creator or admin_user?
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
       @activity = Activity.find(params[:id])
       @idmes = @activity.id
+    end
+    
+    def admin_user?
+      current_user.name == "administrator"
     end
     
     def set_user
@@ -124,6 +128,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:id_location, :name, :date, :duration, :id_cathegory, :description, :privacy)
+      params.require(:activity).permit(:id_location, :name, :date, :duration, :id_cathegory, :description, :privacy, :accepted)
     end
 end
