@@ -1,0 +1,120 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @activity.name %>
+</h1>
+
+<creator>by 
+  <%@user=User.find_by_id(@activity.id_creator) %>
+  <%= link_to "#{@user.name}", user_path(@user.id) %>
+</creator>
+<p>
+  <strong>Location:</strong>
+  <%@loc = Location.find_by_id(@activity.id_location)%>
+  <%= link_to "#{@loc.name}", location_path(@loc.id) %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @activity.date %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @activity.duration %>
+</p>
+
+<p>
+  <strong>Cathegory:</strong>
+  <%@cat = Cathegory.find_by_id(@activity.id_cathegory)%>
+  <%= link_to "#{@cat.name}", cathegory_path(@cat.id) %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @activity.description %>
+</p>
+
+<p>
+  <strong>Privacy:</strong>
+  <%= @activity.privacy %>
+</p>
+
+<invited>
+  <div>
+    <% 
+    @count = 0
+    @icount = 0
+    @target = nil
+    @usacts = UserAct.all 
+        @usacts.each do |kaze|
+          if kaze.id_activity == @activity.id
+            @icount+=1
+          end
+        end
+        @usacts.each do |f|
+          if f.id_activity == @activity.id %>
+            <% @target = User.find(f.id_user)
+            if @target != nil 
+              if @count ==0 %>
+                <strong>People who're going (<%=@icount%>)</strong>
+                <% @count = 1%>
+            <% end
+            end%>
+              <p>
+                <%= link_to "#{@target.name}", user_path(@target.id) %>
+              </p>
+            <% 
+          end  
+        end%>
+  </div>
+</invited>
+
+<%= link_to 'Edit', edit_activity_path %> |
+<%= link_to 'Back', activities_path %>
+
+<p>
+  <%= notRepeated = true
+    @thisUser=nil
+    @user_acts=UserAct.all
+    @user_acts.each do |e|
+      if current_user[:id] == e.id_user
+        if @activity[:id] == e.id_activity
+          @thisUser=e
+          notRepeated = false
+        end
+      end
+    end
+    if notRepeated then
+      button_to 'Going!', user_acts_path(:id_activity => @activity[:id], :id_user => current_user[:id])
+    else
+      button_to 'Not Going',@thisUser, method: :delete, data: { confirm: 'Are you sure?' }
+
+    end
+  %>
+
+  <!-- <%=button_to 'Going!', user_acts_path(:id_activity => @activity[:id], :id_user => current_user[:id]) %> -->
+</p>
+<h1>Forum about this activity</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Creator</th>
+      <th>Title</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+	  <%@mes = Mesaje.where(id_activity: @idmes)%>
+      <% @mes.each do |mesaje| %>
+      <tr>
+        
+        <td><%= mesaje.id_creator%></td>
+        <td><%= mesaje.title %></td>
+        <td><%= mesaje.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

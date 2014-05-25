@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @location.name %>
+</p>
+<p>
+	<% @count=0
+		Activity.all.each do |e|
+			if e.id_location == @location.id
+				if @count==0%>
+					<strong>Events in this location:</strong>
+				<% @count=1 
+				end %>
+				<p> <%= link_to "#{e.name}", activity_path(e.id) %> </p>
+				<%
+			end
+		end
+		%>
+</p>
+<options>
+	<%= link_to 'Edit', edit_location_path(@location) %> |
+	<%= link_to 'Back', locations_path %>
+</options>

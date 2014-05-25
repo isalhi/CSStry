@@ -1,0 +1,35 @@
+<h1>Listing cathegories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cathegories.each do |cathegory| %>
+      <tr>
+        <td><%= cathegory.name %></td>
+        <td> <% @actcounter=0
+                Activity.all.each do |a|
+                  if a.cathegory == "#{cathegory.id}"
+                    @actcounter+=1;
+                  end
+                end %>
+                <%= "(#{@actcounter})" %></td>
+        <td><%= link_to 'Show', cathegory %></td>
+        <td><%= link_to 'Edit', edit_cathegory_path(cathegory) %></td>
+        <td><%= link_to 'Destroy', cathegory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cathegory', new_cathegory_path %>

@@ -1,0 +1,23 @@
+
+<header>
+<nav class="logo">
+  <p> <span class="campus"> CampUS </span>  <%= link_to "Whats hot", activities_path %> </p>
+</nav>
+  
+<nav class="banner">
+   <ul>
+      <li><%= link_to "Home", home_path %></li>
+      <% if signed_in? %>
+        <li><%= link_to "Search", new_search_path %></li>
+        <li><%= link_to "#{current_user.name}\'s Profile", current_user %></li>
+        <li><%= link_to "Create Activity", new_activity_path %><li>
+      <% end %>
+      <li><%= link_to "Help", '#' %></li>
+      <% if signed_in? %>
+      <li><%= link_to "Logout", signout_path, :method => :delete %></li>
+      <% else %>
+      <li><%= link_to "Sign In", signin_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>

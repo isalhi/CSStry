@@ -1,0 +1,29 @@
+<h1>Listing user_acts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id activity</th>
+      <th>Id user</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_acts.each do |user_act| %>
+      <tr>
+        <td><%= user_act.id_activity %></td>
+        <td><%= user_act.id_user %></td>
+        <td><%= link_to 'Show', user_act %></td>
+        <td><%= link_to 'Edit', edit_user_act_path(user_act) %></td>
+        <td><%= link_to 'Destroy', user_act, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User act', new_user_act_path %>

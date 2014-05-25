@@ -1,0 +1,33 @@
+<h1>Listing mesajes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id creator</th>
+      <th>Id activity</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mesajes.each do |mesaje| %>
+      <tr>
+        <td><%= mesaje.id_creator %></td>
+        <td><%= mesaje.id_activity %></td>
+        <td><%= mesaje.title %></td>
+        <td><%= mesaje.description %></td>
+        <td><%= link_to 'Show', mesaje %></td>
+        <td><%= link_to 'Edit', edit_mesaje_path(mesaje) %></td>
+        <td><%= link_to 'Destroy', mesaje, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mesaje', new_mesaje_path %>

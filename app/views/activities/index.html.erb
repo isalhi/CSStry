@@ -1,0 +1,29 @@
+<h1>Listing activities</h1>
+
+<% @activities.each do |activity| %>
+<div>
+<aside class="index_aside">
+    <p><%= activity.date %></p>
+	<p><%= activity.duration %></p>
+	
+</aside>
+
+<article class="index_article">
+	<h2><%= activity.name %></h2>
+	<p><%@loc = Location.find_by_id(activity.id_location)%><%= @loc.name %></p>
+	<p> Created by <%@uss = User.find_by_id(activity.id_creator)%><%= @uss.name %></p>
+	  
+     <p> <%= link_to 'Show', activity %> |
+        <%= link_to 'Edit', edit_activity_path(activity) %> |
+        <%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  </article>
+  </div>
+
+    <% end %>
+
+ 
+
+<br>
+
+<%= link_to 'Create your activity !', new_activity_path %> <br>
+

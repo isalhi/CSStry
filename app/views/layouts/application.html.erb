@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= cool %></title>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= render 'layouts/stylesheets' %>
+ </head>
+
+<body>
+<div class="container">
+	<%= render 'layouts/header'%>
+	
+	<nav id="homenav">
+	 <% if signed_in? %>
+	      <li><%= link_to "Activities", activities_path %></li>
+	      <li><%= link_to "Users", users_path %></li>
+	      <li><%= link_to "Places", locations_path %></li>
+	      <li><%= link_to "Cathegories", cathegories_path %></li>
+		  <% end %>
+	 </nav>
+<section class="round">
+<%= yield %>
+</section>
+</div>
+</body>	 	
+</html>

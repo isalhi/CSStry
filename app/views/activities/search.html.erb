@@ -1,0 +1,7 @@
+<%= search_form_for @q url: search_people_path,
+                        html: { method: :post } do |f| %>
+  <%= f.label :id_location %>
+  <%= f.number_field :id_location %>
+  
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cathegory.name %>
+</p>
+<p>
+	<% @count=0
+		Activity.all.each do |e|
+			if e.cathegory == "#{@cathegory.id}"
+				if @count==0%>
+					<strong>Events in this cathegory:</strong>
+				<% @count=1 
+				end %>
+				<p> <%= link_to "#{e.name}", activity_path(e.id) %> </p>
+				<%
+			end
+		end
+		%>
+</p>
+
+<%= link_to 'Edit', edit_cathegory_path(@cathegory) %> |
+<%= link_to 'Back', cathegories_path %>

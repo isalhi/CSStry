@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id creator:</strong>
+  <%= @mesaje.id_creator %>
+</p>
+
+<p>
+  <strong>Id activity:</strong>
+  <%= @mesaje.id_activity %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @mesaje.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @mesaje.description %>
+</p>
+
+<%= link_to 'Edit', edit_mesaje_path(@mesaje) %> |
+<%= link_to 'Back', mesajes_path %>

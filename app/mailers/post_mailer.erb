@@ -1,0 +1,8 @@
+class PostMailer < ActionMailer::Base
+  def new_activity(user)
+    @user = user
+    mail(to: @user.email, subject: 'New Activity')
+    from "Example.com<no-reply@example.com>"
+   
+    end
+end

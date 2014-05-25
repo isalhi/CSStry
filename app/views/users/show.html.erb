@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<div class="bloc">
+  <div class="name">
+  <strong> Welcome to you <br><span id="profile_name"><%= @user.name %></span></strong>
+  </div>
+  
+ <article class="info">
+    <p><%= @user.email %> | <%= link_to "Friends", '#'%> | <%= link_to "Activities", activities_path %>
+	
+	
+	 <% if admin_situation?(@user)%> 
+	  <%= "Admin Situation:" "#{@user.admin}" %>
+	<% end %>
+       </p>
+  </article>
+  
+  <article class="profileaside">
+  <p> <%= link_to 'Edit Profile', edit_user_path(@user) %></p>
+  <p>    <%= link_to 'Users', users_path %></p>
+  <p>	<%= link_to 'Current Events', activities_path %></p>
+  <p> <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  
+  </article>
+  
+
+<going>
+  <div>
+    <% 
+    @count = 0
+    @target = nil
+    @usacts = UserAct.all 
+        @usacts.each do |f|
+          if f.id_user == @user.id %>
+            <% @target = Activity.find(f.id_activity)
+            if @target != nil 
+              if @count ==0 %>
+                <strong><%= "#{@user.name}" %> is going to these events:</strong>
+                <% @count = 1%>
+            <% end
+            end%>
+              <p>
+                <%= link_to "#{@target.name}", activity_path(@target.id) %>
+              </p>
+            <% 
+          end  
+        end%>
+  </div>
+</going>
+</div>
+
+
+

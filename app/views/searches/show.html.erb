@@ -1,0 +1,151 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Results: </h1>
+
+<%@countname =0%>
+
+<p>
+  <!--first we search activity name -->
+  <% if @search.actname!=""%>
+    <p>Matches under name "<%=@search.actname%>"</p>
+  <%end%>
+  <% 
+  	  @zero=0
+	  @acts=Activity.all
+	  @acts.each do |a|
+	  		if @search.actname != ""
+		  		if a.name == @search.actname
+		  			@countname+=1
+		  			%>
+		  			<p>
+		  				<%= link_to "#{a.name}", activity_path(a.id) %>
+		  			</p>
+		  			<%
+		  		end
+		  	else
+		  		if @zero==0
+			  		%>
+			  			<p>No activity name provided.</p>
+			  		<%
+			  		@zero=1	
+		  		end			
+	  		end
+	  	end
+  %>
+</p>
+
+<p>-----------------------------------------------------------------------------</p>
+
+<p>
+ <!--now we find under location name-->
+ <% if @search.locname!=""%>
+ <p>Matches under location "<%=@search.locname%>"</p>
+ <%end%>
+ 	<% 
+ 	  @zero=0
+	  @locs=Location.all
+	  @locs.each do |l|
+	  		if @search.locname != ""
+		  		if l.name == @search.locname
+		  			@acts=Activity.all
+		  			@acts.each do |a|
+			  			if a.id_location == l.id
+				  			@countname+=1
+				  			%>
+				  			<p>
+				  				<%= link_to "#{a.name}", activity_path(a.id) %>
+				  			</p>
+				  			<%
+			  			end
+		  			end
+		  		end
+		  	else
+		  		if @zero==0
+			  		%>
+			  			<p>No location name provided.</p>
+			  		<%
+			  		@zero=1	
+		  		end	
+	  		end
+	  	end
+  %>
+</p>
+
+<p>-----------------------------------------------------------------------------</p>
+
+<p>
+ <!--now we find under creator name-->
+ <% if @search.creator!=""%>
+ <p>Matches under creator "<%=@search.creator%>"</p>
+ <% end %>
+ 	<% 
+ 	  @zero=0
+	  @uss=User.all
+	  @uss.each do |u|
+	  		if @search.creator != ""
+		  		if u.name == @search.creator
+		  			@acts=Activity.all
+		  			@acts.each do |a|
+			  			if a.id_creator == u.id
+				  			@countname+=1
+				  			%>
+				  			<p>
+				  				<%= link_to "#{a.name}", activity_path(a.id) %>
+				  			</p>
+				  			<%
+			  			end
+		  			end
+		  		end
+		  	else
+		  		if @zero==0
+			  		%>
+			  			<p>No user name provided.</p>
+			  		<%
+			  		@zero=1	
+		  		end	
+	  		end
+	  	end
+  %>
+</p>
+
+<p>-----------------------------------------------------------------------------</p>
+
+<p>
+ <!--now we find under cathegory name-->
+ <% if @search.catname!=""%>
+ <p>Matches under cathegory "<%=@search.catname%>"</p>
+ <%end%>
+ 	<% 
+ 	  @zero=0
+	  @cat=Cathegory.all
+	  @cat.each do |c|
+	  		if @search.catname != ""
+		  		if c.name == @search.catname
+		  			@acts=Activity.all
+		  			@acts.each do |a|
+			  			if a.id_cathegory == c.id
+				  			@countname+=1
+				  			%>
+				  			<p>
+				  				<%= link_to "#{a.name}", activity_path(a.id) %>
+				  			</p>
+				  			<%
+			  			end
+		  			end
+		  		end
+		  	else
+		  		if @zero==0
+			  		%>
+			  			<p>No user name provided.</p>
+			  		<%
+			  		@zero=1	
+		  		end	
+	  		end
+	  	end
+  %>
+</p>
+
+<strong> We found <%=@countname%> results under given criteria. </strong>
+<p>
+<%= link_to 'Back', activities_path %>
+</p>
