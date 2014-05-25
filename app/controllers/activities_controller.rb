@@ -29,6 +29,9 @@ class ActivitiesController < ApplicationController
   # GET /activities/1
   # GET /activities/1.json
   def show
+    @mesaje = Mesaje.new
+    @mesaje.id_creator = current_user.id
+    @mesaje.id_activity = @activity.id
    
     
   end

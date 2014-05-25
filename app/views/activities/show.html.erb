@@ -98,23 +98,52 @@
 <h1>Forum about this activity</h1>
 
 <table>
+
   <thead>
+	  <%@mes = Mesaje.where(id_activity: @activity.id)%>
+      <% @mes.each do |mesaje| %>
+	  <% @creator = User.find_by_id(mesaje.id_creator)%>
     <tr>
-      <th>Creator</th>
-      <th>Title</th>
-      <th>Description</th>
+      <th>By <%= @creator.name%></th>
+	  <th class="description">Message</th>
     </tr>
   </thead>
-
   <tbody>
-	  <%@mes = Mesaje.where(id_activity: @idmes)%>
-      <% @mes.each do |mesaje| %>
-      <tr>
-        
-        <td><%= mesaje.id_creator%></td>
-        <td><%= mesaje.title %></td>
-        <td><%= mesaje.description %></td>
+	  <tr>
+		<td>Title <%= mesaje.title %></td>
+        <td class="description"><%= mesaje.description %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= form_for(@mesaje) do |f| %>
+  <% if @mesaje.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mesaje.errors.count, "error") %> prohibited this mesaje from being saved:</h2>
+
+      <ul>
+      <% @mesaje.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :id_activity %><br>
+    <%= f.number_field :id_activity%>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
